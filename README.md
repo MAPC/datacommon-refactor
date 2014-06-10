@@ -18,6 +18,106 @@ This refactor will not address:
 This repository will include only the GeoNode project, and will not deal with GeoServer at all.
 
 
+Setting Up
+------------
+
+### Install `pip`, `virtualenv`, and `mkvirtualenv`.
+
+On Ubuntu:
+
+```sh
+// From http://hosseinkaz.blogspot.com/2012/06/how-to-install-virtualenv.html
+
+$ sudo apt-get update
+$ sudo apt-get install python-setuptools python-dev build-essential git-core -y
+
+$ sudo easy_install pip
+
+$ sudo pip install virtualenv
+$ sudo pip install virtualenvwrapper
+
+$ mkdir ~/virtualenvs 
+
+$ echo "export WORKON_HOME=~/virtualenvs" >> ~/.bashrc
+$ echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc 
+$ echo "export PIP_VIRTUALENV_BASE=~/virtualenvs" >> ~/.bashrc 
+
+$ source ~/.bashrc 
+
+```
+
+On OS X:
+
+You may not be able to install `mkvirtualenv`. It's tricky.
+
+```sh
+$ sudo easy_install pip
+
+$ sudo pip install virtualenv
+
+$ mkdir ~/virtualenvs 
+
+$ echo "export WORKON_HOME=~/virtualenvs" >> ~/.bashrc
+$ echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc 
+$ echo "export PIP_VIRTUALENV_BASE=~/virtualenvs" >> ~/.bashrc 
+
+$ source ~/.bashrc 
+```
+
+
+### Create a virtual environment to sandbox your development.
+
+With `mkvirtualenv`:
+
+```sh
+$ mkvirtualenv datacommon
+```
+
+Without `mkvirtualenv`:
+
+```sh
+$ virtualenv datacommon
+```
+
+#### To activate your virtual environment:
+
+With `mkvirtualenv`:
+
+```sh
+$ workon datacommon
+```
+
+Without `mkvirtualenv`:
+
+```sh
+$ cd PIP_VIRTUALENV_BASE/datacommon
+$ source bin/activate
+```
+
+
+### Install Django 1.7
+
+Inside your virtual environment (after activating it), install Django inside.
+
+```sh
+// from https://www.djangoproject.com/download/
+
+(datacommon)$ pip install https://www.djangoproject.com/download/1.7.b4/tarball/
+```
+
+
+4. Install GeoNode
+
+Inside your virtual environment (after activating it), install Django inside.
+
+```sh
+// from Geonode Docs: http://geonode.org/2014/04/geonode-2-0/index.html
+
+// TODO
+(datacommon)$ 
+```
+
+
 Contributing
 ------------
 
