@@ -1,0 +1,16 @@
+CONFIG = {
+    'mode': 'wsgi',
+    'environment': {
+        'PYTHONPATH': '/home/datacommon/venv/lib/python2.7/site-packages:/home/datacommon/geonode.git',
+    },
+    'working_dir': '/home/datacommon/datacommon.git/',
+    'user': 'www-data',
+    'group': 'www-data',
+    'args': (
+        '--bind=127.0.0.1:8100',
+        '--workers=6',
+        '--worker-class=eventlet',
+        '--timeout=240',
+        'datacommon.wsgi',
+    ),
+}

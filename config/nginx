@@ -1,0 +1,43 @@
+upstream datacommon_gunicorn {
+    server 127.0.0.1:8100 fail_timeout=0;
+}
+
+server {
+    listen 80 default;
+    server_name	66.181.92.20;
+
+    client_max_body_size 4G;
+    keepalive_timeout 5;
+
+    access_log /home/datacommon/logs/nginx-access.log;
+    error_log /home/datacommon/logs/nginx-error.log;
+
+    location /static {
+        alias /home/datacommon/static;
+    }
+
+    location /media {
+        alias /home/datacommon/media;
+    }
+
+    location /geoserver/ {
+        proxy_pass              http://localhost:8080/geoserver/;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        Host $http_host;
+        proxy_read_timeout 60;
+    }
+
+    location / {
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-Real-IP $remote_addr;
+
+        #proxy_redirect off;
+	#proxy_intercept_errors off;
+        proxy_read_timeout  60;
+
+        proxy_pass   http://127.0.0.1:8100;
+    }
+
+}
